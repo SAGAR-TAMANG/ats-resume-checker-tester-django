@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Resume Checker - Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col bg-primary text-white p-5">
+      <span class="fs-1">Upload Your File:</span>
+      <br>
+      <br>
+      It can be a word or pdf file.
+    </div>
+    <div class="col bg-white text-white d-flex align-items-center justify-content-center">
+      <form method="post" id="uploadForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.file }}
+        <input type="file" name="file" id="fileInput" style="display: none;">
+      </form>
+      <button id="upload" class="btn btn-outline-dark btn-lg">
+        UPLOAD FILE
+      </button>
+    </div>
+  </div>
+  {% if url %}
+  <div class="d-flex justify-content-center">
+    <img src="{{url}}" alt="{{name}}">
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  uploadButton = document.getElementById("upload");
+  inputFile = document.getElementById("fileInput");
+  uploadForm = document.getElementById("uploadForm")
+
+  uploadButton.addEventListener("click", function(){
+    inputFile.click();
+  })
+
+  inputFile.addEventListener("change", function(){
+    var uploadedFile = inputFile.files[0];
+
+    if (uploadedFile) {
+      alert("File uploaded successfully! \n File URL: {{ file_url }}");
+      uploadForm.submit();
+    }
+  })
+</script>
+
+{% endblock %}
