@@ -18,14 +18,31 @@
         {{ form.file }}
         <input type="file" name="file" id="fileInput" style="display: none;">
       </form>
+      {% if url %}
+      <button id="upload" class="btn btn-outline-dark btn-lg">
+        UPLOAD NEW
+      </button>
+      {% else %}
       <button id="upload" class="btn btn-outline-dark btn-lg">
         UPLOAD FILE
       </button>
+      {% endif %}
     </div>
   </div>
   {% if url %}
-  <div class="d-flex justify-content-center">
-    <img src="{{url}}" alt="{{name}}">
+  <p class="text-dark text-center">
+    FILE: <span class="text-primary">{{ name }}</span> uplaoded
+  </p>
+  {{url}}
+
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="w-50 border">
+      {% if extension == ".pdf" %}
+      <iframe src="{{url}}" frameborder="0" height="500px" scrolling="no"></iframe>
+      {% else %}
+      <img src="{{url}}" alt="{{name}}" class="w-100">
+      {% endif %}
+    </div>
   </div>
   {% endif %}
 </div>
@@ -43,9 +60,10 @@
     var uploadedFile = inputFile.files[0];
 
     if (uploadedFile) {
-      alert("File uploaded successfully! \n File URL: {{ file_url }}");
       uploadForm.submit();
     }
+
+    alert("File uploaded successfully!"); 
   })
 </script>
 
