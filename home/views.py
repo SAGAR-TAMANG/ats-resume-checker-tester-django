@@ -22,3 +22,6 @@ def home(request):
         context['name'] = uploaded_file.name
         context['extension'] = file_extension
     return render(request, 'index.html', context)
+
+def analyzer(request):
+    return render(request, 'ats.html')

@@ -6,11 +6,15 @@
 
 <div class="container">
   <div class="row">
-    <div class="col bg-primary text-white p-5">
-      <span class="fs-1">Upload Your File:</span>
+    {% if extension == '.pdf' %}
+    <div class="col bg-success text-white p-5">
+    {% else %}
+    <div class="col bg-danger text-white p-5">
+    {% endif %}
+      <span class="fs-1">Upload Your Resume:</span>
       <br>
       <br>
-      It can be a word or pdf file.
+      <span class="fs-5">It can be a word or pdf file.</span>
     </div>
     <div class="col bg-white text-white d-flex align-items-center justify-content-center">
       <form method="post" id="uploadForm" enctype="multipart/form-data">
@@ -18,9 +22,12 @@
         {{ form.file }}
         <input type="file" name="file" id="fileInput" style="display: none;">
       </form>
-      {% if url %}
-      <button id="upload" class="btn btn-outline-dark btn-lg">
+      {% if extension == ".pdf" %}
+      <button id="upload" class="btn btn-outline-danger btn-lg m-2">
         UPLOAD NEW
+      </button>
+      <button id="next" class="btn btn-outline-primary btn-lg">
+        NEXT
       </button>
       {% else %}
       <button id="upload" class="btn btn-outline-dark btn-lg">
@@ -31,17 +38,24 @@
   </div>
   {% if url %}
   <p class="text-dark text-center">
-    FILE: <span class="text-primary">{{ name }}</span> uplaoded
+    {% if extension == ".pdf" %}
+    FILE: <span class="text-primary">{{ name }}</span> uploaded successfully!
+    {% else %}
+    FILE: <span class="text-danger">{{ name }}</span> uploaded.
+    <br>
+    <span class="text-danger">Kindly upload a <span class="text-primary">".pdf"</span> or <span class="text-primary">".docx"</span> Extension File </span>
+    {% endif %}
   </p>
-  {{url}}
 
   <div class="d-flex justify-content-center align-items-center">
-    <div class="w-50 border">
+    <div class="w-75">
+      <center>
       {% if extension == ".pdf" %}
-      <iframe src="{{url}}" frameborder="0" height="500px" scrolling="no"></iframe>
+      <iframe src="{{url}}" frameborder="0" height="400px" width="100%"></iframe>
       {% else %}
       <img src="{{url}}" alt="{{name}}" class="w-100">
       {% endif %}
+      </center>
     </div>
   </div>
   {% endif %}
@@ -51,6 +65,8 @@
   uploadButton = document.getElementById("upload");
   inputFile = document.getElementById("fileInput");
   uploadForm = document.getElementById("uploadForm")
+
+  nextButton = document.getElementById("next");
 
   uploadButton.addEventListener("click", function(){
     inputFile.click();
@@ -63,7 +79,11 @@
       uploadForm.submit();
     }
 
-    alert("File uploaded successfully!"); 
+    <!-- alert("File uploaded successfully!");  -->
+  })
+
+  nextButton.addEventListener("click", function(){
+    window.location.href="ats/analyzer";
   })
 </script>
 
