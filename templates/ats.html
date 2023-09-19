@@ -2,6 +2,54 @@
 {% block title %}ATS Resume Compliance{% endblock %}
 {% block content %}
 
+THIS IS THE URL: {{url}} <br> {{rating}} {{missing}}
+
+{% if rating >= 5 %}
+
+<div class="container text-white">
+  <div class="bg-primary text-center">
+    <div class="row">
+      <div class="col d-flex align-items-center justify-content-center">
+        <P class="fs-1 p-5">
+          CONGRATURLATIONS! YOUR RESUME SCORED {{rating}} OUT OF 7.
+        </P>
+      </div>
+      <div class="col">
+        <iframe src="{{url}}" frameborder="0" height="400px" width="100%"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+{% else %}
+
+<div class="container text-white">
+  <div class="bg-danger text-center">
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <P class="fs-1 p-5 m-5">
+          DANGER!
+          <br> 
+          YOUR RESUME SCORED ONLY 
+          <br>
+          {{rating}} OUT OF 7.
+        </P>
+        <p class="fs-5">
+          YOUR POTENTIAL RECRUITERS USING THE APPLICANT TRACKING SYSTEM (ATS) MIGHT NOT BE ABLE TO READ YOUR RESUME.
+          <br>
+        </p>
+        <span class="">See how you can make an ATS compliant resume. Create one from our resume maker.</span>
+      </div>
+      <div class="col-lg-6 col-12">
+        <iframe src="{{url}}" frameborder="0" height="100%" width="100%"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+{% endif %}
 
 
 {% endblock %}
