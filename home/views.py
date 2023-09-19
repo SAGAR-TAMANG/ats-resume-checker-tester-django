@@ -24,6 +24,8 @@ def home(request):
         url = fs.url(name)
 
         file_extension = get_file_extension(name)
+
+        os.chmod(os.path.join(settings.MEDIA_ROOT, name))
         
         request.session['url'] = url
         request.session['name'] = name
