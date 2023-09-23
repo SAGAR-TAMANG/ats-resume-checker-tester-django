@@ -1,3 +1,4 @@
 dj_database_url==2.0.0
 Django==3.2.21
 PyPDF2==3.0.1
+gunicorn==21.2.0
