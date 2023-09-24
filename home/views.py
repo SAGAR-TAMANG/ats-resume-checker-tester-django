@@ -87,3 +87,7 @@ def analyzer(request):
     context['missing'] = missing
     
     return render(request, 'ats.html', context)
+
+
+def about(request):
+    return render(request, 'about.html')
