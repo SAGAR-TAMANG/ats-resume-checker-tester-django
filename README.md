@@ -1,4 +1,4 @@
-## ATS RECUME CHECKER
+## ATS RESUME CHECKER
 
 [ats-resume-checker-web-application](https://ats-resume-analyzer-django.onrender.com/)
 
